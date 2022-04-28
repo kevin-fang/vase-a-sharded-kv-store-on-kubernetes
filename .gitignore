@@ -1,0 +1,7 @@
+backups/*
+__pycache__/*
+keys/**.json
+**/.ipynb_checkpoints/**
+**/__pycache__/**
+benchmarking/*.txt
+benchmarking/*.csv

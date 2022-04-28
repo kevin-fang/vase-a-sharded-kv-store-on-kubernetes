@@ -1,0 +1,45 @@
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sharder-endpoint
+spec:
+  type: LoadBalancer
+  ports:
+    - name: etcd-client
+      port: 5000
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: etcd_sharder
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etcd-sharder
+  labels:
+    app: etcd-sharder
+spec:
+  replicas: 30
+  selector:
+    matchLabels:
+      app: etcd_sharder
+  template:
+    metadata:
+      name: etcd_sharder
+      labels:
+        app: etcd_sharder
+    spec:
+      containers:
+        - name: sharder
+          image: kfang1233/etcd-sharder:latest
+          ports:
+            - containerPort: 5000
+              name: client
+          resources:
+            limits:
+              cpu: 300m
+            requests:
+              cpu: 200m

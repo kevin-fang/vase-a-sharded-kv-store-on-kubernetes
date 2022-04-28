@@ -1,0 +1,47 @@
+Count,Message,Traceback,Nodes
+2,[Errno 54] Connection reset by peer,"  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/user/task.py"", line 319, in run
+    self.execute_next_task()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/user/task.py"", line 344, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/user/task.py"", line 457, in execute_task
+    task(self.user)
+  File ""/Users/kevinfang/Desktop/class/cs512/final-project/benchmarking/locustfile.py"", line 18, in diff_server
+    self.client.get(f""/get/key_{new_key}"")
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/contrib/fasthttp.py"", line 250, in get
+    return self.request(""GET"", path, **kwargs)
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/contrib/fasthttp.py"", line 221, in request
+    request_meta[""response_length""] = len(response.content or """")
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/geventhttpclient/useragent.py"", line 197, in content
+    self._cached_content = self._content()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/contrib/fasthttp.py"", line 386, in _content
+    return super()._content()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/geventhttpclient/useragent.py"", line 212, in _content
+    ret = self._response.read()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/geventhttpclient/response.py"", line 259, in read
+    data = self._sock.recv(length or self.block_size)
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/gevent/_socketcommon.py"", line 657, in recv
+    return self._sock.recv(*args)
+",local
+2,[Errno 54] Connection reset by peer,"  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/user/task.py"", line 319, in run
+    self.execute_next_task()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/user/task.py"", line 344, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/user/task.py"", line 457, in execute_task
+    task(self.user)
+  File ""/Users/kevinfang/Desktop/class/cs512/final-project/benchmarking/locustfile.py"", line 15, in diff_server
+    response = self.client.put(
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/contrib/fasthttp.py"", line 270, in put
+    return self.request(""PUT"", path, data=data, **kwargs)
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/contrib/fasthttp.py"", line 221, in request
+    request_meta[""response_length""] = len(response.content or """")
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/geventhttpclient/useragent.py"", line 197, in content
+    self._cached_content = self._content()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/locust/contrib/fasthttp.py"", line 386, in _content
+    return super()._content()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/geventhttpclient/useragent.py"", line 212, in _content
+    ret = self._response.read()
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/geventhttpclient/response.py"", line 259, in read
+    data = self._sock.recv(length or self.block_size)
+  File ""/Users/kevinfang/miniconda3/lib/python3.9/site-packages/gevent/_socketcommon.py"", line 657, in recv
+    return self._sock.recv(*args)
+",local

@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etcd-client-1
+spec:
+  type: LoadBalancer
+  ports:
+    - name: etcd-client
+      port: 2379
+      protocol: TCP
+      targetPort: 2379
+  selector:
+    app: etcd-1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etcd-1
+spec:
+  clusterIP: None
+  ports:
+    - port: 2379
+      name: client
+    - port: 2380
+      name: peer
+  selector:
+    app: etcd-1
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: etcd-1
+  labels:
+    app: etcd-1
+spec:
+  serviceName: etcd-1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: etcd-1
+  template:
+    metadata:
+      name: etcd-1
+      labels:
+        app: etcd-1
+    spec:
+      containers:
+        - name: etcd
+          image: quay.io/coreos/etcd:latest
+          ports:
+            - containerPort: 2379
+              name: client
+            - containerPort: 2380
+              name: peer
+          volumeMounts:
+            - name: data-1
+              mountPath: /tmp/var/run/etcd
+          command:
+            - /bin/sh
+            - -c
+            - |
+              PEERS="etcd-1-0=http://etcd-1-0.etcd-1:2380,etcd-1-1=http://etcd-1-1.etcd-1:2380,etcd-1-2=http://etcd-1-2.etcd-1:2380"
+              exec etcd --name ${HOSTNAME}               --listen-peer-urls http://0.0.0.0:2380               --listen-client-urls http://0.0.0.0:2379               --advertise-client-urls http://${HOSTNAME}.etcd:2379               --initial-advertise-peer-urls http://${HOSTNAME}:2380               --initial-cluster-token etcd-cluster-1               --initial-cluster ${PEERS}               --initial-cluster-state new               --data-dir /tmp/var/run/etcd/default.etcd
+
+  volumeClaimTemplates:
+    - metadata:
+        name: data-1
+      spec:
+        storageClassName: etcd-pd-ssd-1
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
