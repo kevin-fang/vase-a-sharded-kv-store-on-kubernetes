@@ -1,4 +1,5 @@
 # Vase: A Scalable, Consistent, and Sharded Key-Value Store on Kubernetes
+By: Kevin Fang, Kevin Li
 
 Vase is a sharded, consistent and scalable key-value store based on the application etcd, running on Kubernetes. We used ReplicaSet scaling for the sharding service front-end, and StatefulSet scaling for the etcd key-value store backend. The unique nature of etcd allows automatic consensus between leaders and replicas with the Raft algorithm in the Stateful tier, creating a consistent and highly available backend. By scaling both the number of replicas and shards, we were able to demonstrate increased throughput, decreased latency, and improved tail latency.
 
